@@ -62,16 +62,30 @@ fun main() {
     //multiplicación) con ellas. Maneja adecuadamente los casos
     //de valores nulos.
     println("Ejercicio 13")
+    val a: Int? = null
+    val b: Int? = null
+    
+    val suma = (a ?: 0) + (b ?: 0)
+    val resta = (a ?: 0) - (b ?: 0)
+    val multi = (a ?: 0) * (b ?: 0)
+    val div = if (b != null && b != 0) (a ?: 0) / b else "No se puede dividir entre cero"
+    
+    println("Sum: $sum")
+    println("Subtract: $subtract")
+    println("Multiply: $multiply")
+    println("Divide: $divide")
     //Operador Elvis:
     //14. Utiliza el operador elvis (?:) para asignar un valor
     //predeterminado a una variable si esta es nula.
     println("Ejercicio 14")
+    val variable = suma ?: 0
     //Seguridad con Smart Cast:
     //Manejo de Excepciones:
     //15. Crea una función que tome un parámetro de tipo Any y
     //comprueba si es de tipo String. Si es así, imprime su longitud.
     //Utiliza smart cast para trabajar de manera segura con el tipo.
     println("Ejercicio 15")
+    
     // Manejo de Excepciones
     //16. Escribe una función que divida dos números ingresados
     //por el usuario. Implementa el manejo de excepciones para el
@@ -168,3 +182,4 @@ fun remplazaCadenas(str: String, strRemplazar: String, strRemplazado: String): S
 fun divideCadenas(str:String, delimitador: String): List<String> {
     return str.split(delimitador)
 }
+//Ejercicio 16
