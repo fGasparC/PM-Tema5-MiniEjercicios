@@ -70,10 +70,10 @@ fun main() {
     val multi = (a ?: 0) * (b ?: 0)
     val div = if (b != null && b != 0) (a ?: 0) / b else "No se puede dividir entre cero"
     
-    println("Sum: $sum")
-    println("Subtract: $subtract")
-    println("Multiply: $multiply")
-    println("Divide: $divide")
+    println("Suma: $suma")
+    println("Resta: $resta")
+    println("Multiplicacion: $multi")
+    println("Division: $div")
     //Operador Elvis:
     //14. Utiliza el operador elvis (?:) para asignar un valor
     //predeterminado a una variable si esta es nula.
@@ -85,23 +85,26 @@ fun main() {
     //comprueba si es de tipo String. Si es así, imprime su longitud.
     //Utiliza smart cast para trabajar de manera segura con el tipo.
     println("Ejercicio 15")
-    
+    compruebaTamIfString("manolo escobar")
     // Manejo de Excepciones
     //16. Escribe una función que divida dos números ingresados
     //por el usuario. Implementa el manejo de excepciones para el
     //caso en que el divisor sea cero o si se ingresa un valor no
     //numérico.
     println("Ejercicio 16")
+    println(operaOperadores(5,0))
     //Operador de Lectura Segura (readLine):
     //17. Utiliza readLine() para leer una entrada del usuario. Asegúrate
     //de manejar el caso en que el usuario ingrese algo que no pueda
     //convertirse a un tipo específico.
     println("Ejercicio 17")
+
     //Operadores Matemáticos:
     //18. Crea una función que acepte dos números y realice operaciones
     //matemáticas básicas (suma, resta, multiplicación, división). Maneja
     //casos especiales, como la división por cero.
     println("Ejercicio 18")
+
     //Casting Seguro e Inseguro:
     // 19. Declara una variable de tipo Any y realiza un casting seguro e
     //inseguro a otros tipos. Maneja los casos donde el casting inseguro
@@ -182,4 +185,19 @@ fun remplazaCadenas(str: String, strRemplazar: String, strRemplazado: String): S
 fun divideCadenas(str:String, delimitador: String): List<String> {
     return str.split(delimitador)
 }
+//Ejercicio 15
+fun compruebaTamIfString(any: Any){
+    if (any is String){
+        println(any.length)
+    }
+}
 //Ejercicio 16
+fun operaOperadores(a: Int, b: Int): Int? {
+    try{
+        return (a/b)
+    }catch (e: ArithmeticException){
+        e.printStackTrace()
+    }
+    return null
+}
+//Ejercicio 17
