@@ -1,3 +1,21 @@
+import kotlin.math.sqrt
+
+
+class Point(val x: Double, val y: Double) {
+
+    infix fun distancia(otro: Point): Double {
+        val dx = this.x - otro.x
+        val dy = this.y - otro.y
+        return sqrt(dx * dx + dy * dy)
+    }
+}
+class Person (var name: String = "",
+              var age: Int = 0,
+              var address: String = ""){
+    override fun toString(): String {
+        return "Person(nombre='$name', edad=$age, direccion='$address')"
+    }
+}
 fun main() {
     //1. Escribe una función que tome una cadena
     //como parámetro e imprima su longitud./*
@@ -79,6 +97,7 @@ fun main() {
     //predeterminado a una variable si esta es nula.
     println("Ejercicio 14")
     val variable = suma ?: 0
+    println(suma)
     //Seguridad con Smart Cast:
     //Manejo de Excepciones:
     //15. Crea una función que tome un parámetro de tipo Any y
@@ -98,56 +117,130 @@ fun main() {
     //de manejar el caso en que el usuario ingrese algo que no pueda
     //convertirse a un tipo específico.
     println("Ejercicio 17")
-
+    println("Por favor, ingresa un número")
+    val input = readLine()
+    try {
+        val numero = input?.toInt()
+        println("Has ingresado el número: $numero")
+    } catch (e: NumberFormatException) {
+        e.printStackTrace()
+    }
     //Operadores Matemáticos:
     //18. Crea una función que acepte dos números y realice operaciones
     //matemáticas básicas (suma, resta, multiplicación, división). Maneja
     //casos especiales, como la división por cero.
     println("Ejercicio 18")
-
+    insertaCalculaNumeros()
     //Casting Seguro e Inseguro:
     // 19. Declara una variable de tipo Any y realiza un casting seguro e
     //inseguro a otros tipos. Maneja los casos donde el casting inseguro
     //podría generar una excepción.
     println("Ejercicio 19")
+    var c: Any= "Bartolo"
+    println(c)
+    val cSeguro: Char?=c as? Char
+    println(cSeguro)
+    try{
+    val cInseguro:Char=c as Char
+        println(cInseguro)
+    }catch (e: Exception){
+        e.printStackTrace()
+    }
     //Uso de try, catch y finally:
     //20. Escribe un bloque try que contenga código propenso a errores.
     //En el bloque catch, maneja las excepciones y, en el bloque finally,
     //imprime un mensaje independientemente de si se lanzó una
     //excepción o no.
     println("Ejercicio 20")
+    try{
+        println("Introduce un numero o excepcionara")
+        val a=readLine()!!.toInt()
+    }catch (e: Exception){
+        e.printStackTrace()
+    }finally {
+        println("Si no has introducido un numero deberia haber saltado una excepcion")
+    }
     //21. Infix Functions:
     //Crea una clase Point con propiedades x e y. Implementa una función infix
     //que calcule la distancia entre dos puntos.
     println("Ejercicio 21")
+    val punto1 = Point(3.0, 4.0)
+    val punto2 = Point(0.0, 0.0)
+
+    val distancia = punto1 distancia punto2
+    println("La distancia entre los puntos es: $distancia")
     // 22. Lazy y Lateinit:
     // Define una variable lazy que almacene la suma de dos números. La suma
     //debe calcularse solo cuando se accede a la variable. Luego, usa lateinit para
     //inicializar una variable de tipo String antes de asignarle un valor.
     println("Ejercicio 22")
+    val sumita by lazy {
+        println("Calculando la suma")
+        val num1 = 5
+        val num2 = 10
+        num1 + num2
+    }
+    println("La sumita es $sumita")
+    lateinit var mensajito:String
+    mensajito="Hola soy un mensajito lateinit"
+    println(mensajito)
     // 23. With:
     // Utiliza la función with para configurar un objeto StringBuilder. Agrega tres
     //líneas de texto al objeto y luego imprime el resultado.
     println("Ejercicio 23")
+    val resultado = with(StringBuilder()) {
+        append("1 Macarrones\n")
+        append("2 Coches\n")
+        append("3 Perros\n")
+        toString()
+    }
+    println(resultado)
     //24. Apply:
     //Crea una clase Person con propiedades como name, age, y address. Utiliza
     //la función apply para construir una instancia de Person con valores
     //específicos.
     println("Ejercicio 24")
+    val persona = Person().apply {
+        name = "Bartola"
+        age = 53
+        address = "Yoquese 1, Madrid"
+    }
+    println(persona.toString())
     // 25. Run:
     // Define una función calculateArea que toma la longitud y el
     //ancho de un rectángulo y devuelve su área. Luego, utiliza run
     //para imprimir el área de un rectángulo específico.
     println("Ejercicio 25")
+    val area=run{
+        val a=10.0
+        val b=300.30
+        calculaArea(a,b)
+    }
+    println("El área del rectángulo es: $area")
+
     //26. Let:
     // Declara una cadena nullable y utiliza la función let para
     //imprimir su longitud solo si no es nula.
     println("Ejercicio 26")
+    val cadena: String? = "aaaaaaaaaaaaaaaaaaaaaa"
+    cadena?.let {
+        println("La longitud de la cadena es: ${cadena.length}")
+    }
+
     //27. Also:
     //Crea una lista de números y utiliza la función also para
     //imprimir un mensaje antes y después de aplicar una
     //operación a cada elemento de la lista
     println("Ejercicio 27")
+    val numeros = listOf(1, 2, 3, 4, 5)
+
+    numeros.map { it * 2 }
+        .also {
+            println("Antes de la operación, la lista es: $numeros")
+        }
+        .also {
+            println("Después de la operación, la nueva lista es: $it")
+        }
         }
 //Ejercicio 1
 fun imprimeLongitudCadena(str: String) {
@@ -200,4 +293,24 @@ fun operaOperadores(a: Int, b: Int): Int? {
     }
     return null
 }
-//Ejercicio 17
+//Ejercicio 18
+fun insertaCalculaNumeros(){
+
+    try{
+        println("Introduce un numero")
+        val a=readLine()!!.toInt()
+        println("Introduce otro numero")
+        val b=readLine()!!.toInt()
+        println("Suma = ${a+b}")
+        println("Resta= ${a-b}")
+        println("Multiplicacion= ${a*b}")
+        println("Division= ${a/b}")
+    }
+    catch(e: Exception){
+        e.printStackTrace()
+    }
+}
+//Ejercicio 25
+fun calculaArea(a: Double, b: Double): Double {
+    return a * b
+}
